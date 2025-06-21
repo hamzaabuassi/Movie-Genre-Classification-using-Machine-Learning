@@ -1,19 +1,19 @@
-# 🎬 Movie Genre Classification using Machine Learning & NLP
+# 🎬 Movie Genre Classification Using Machine Learning
 
-This project focuses on classifying movie genres based on movie descriptions using advanced Natural Language Processing (NLP) and Machine Learning (ML) techniques. The aim is to build an accurate multi-class classifier capable of predicting genres from textual descriptions and some numeric metadata.
+This project focuses on classifying movie genres based on movie descriptions and metadata using classical machine learning techniques combined with TF-IDF text vectorization.
 
 ---
 
 ## 🚀 Project Overview
 
-- **Dataset:** Movie metadata including `Description`, `Genre`, `Rating`, `Duration`, `Release Year`.
-- **Text Processing:** TF-IDF vectorization of movie descriptions.
-- **Data Balancing:** Techniques including SMOTE, Random OverSampler, Random UnderSampler.
-- **Feature Scaling:** StandardScaler, MinMaxScaler, RobustScaler.
-- **Dimensionality Reduction:** PCA, LDA, TruncatedSVD.
+- **Dataset:** Movie metadata including `Description`, `Genre`, `Rating`, `Duration`, and `Release Year`.
+- **Text Processing:** TF-IDF vectorization of movie descriptions to convert text into numerical features.
+- **Data Balancing:** Addressed class imbalance using SMOTE, Random OverSampler, and Random UnderSampler.
+- **Feature Scaling:** Applied StandardScaler, MinMaxScaler, and RobustScaler.
+- **Dimensionality Reduction:** Used PCA, LDA, and TruncatedSVD to reduce feature space.
 - **Models Used:** Logistic Regression, Decision Tree, Random Forest, SVM, KNN, XGBoost, Naive Bayes, Gradient Boosting, MLP, Extra Trees.
 - **Evaluation Metrics:** Accuracy, Precision, Recall, F1-Score.
-- **Visualization:** Word clouds, PCA scatterplots, heatmaps, bar plots, and interactive plots using Plotly.
+- **Visualization:** Word clouds, PCA scatterplots, heatmaps, bar plots, and interactive visualizations with Plotly.
 
 ---
 
@@ -21,7 +21,7 @@ This project focuses on classifying movie genres based on movie descriptions usi
 
 - **Source:** Kaggle  
 - **File:** `movie_genre_classification_final.csv`  
-- **Description:** Contains movie titles, textual descriptions, genres, and numeric features like rating, duration, and release year.
+- **Description:** Contains movie descriptions, genres, and numerical features like rating, duration, and release year.
 
 ---
 
@@ -29,63 +29,53 @@ This project focuses on classifying movie genres based on movie descriptions usi
 
 ### 1. Data Loading and Cleaning
 
-- Load CSV data.
-- Convert `Description` column to string type.
-- Impute missing values using the most frequent value per column.
+- Loaded dataset and converted `Description` column to string type.
+- Imputed missing values using the most frequent value strategy.
 
 ### 2. Exploratory Data Analysis (EDA)
 
-- Plot genre distribution using logarithmic scale.
-- Generate word clouds for each genre to visualize common words.
-- Apply TF-IDF vectorization on movie descriptions.
-- Use PCA (2 components) to visualize TF-IDF embeddings by genre.
-- Calculate Mutual Information to find top informative words per genre.
-- Visualize numerical feature distributions (`rating`, `duration`, `release_year`) across genres using violin plots.
+- Plotted genre distribution (log scale).
+- Generated word clouds per genre to visualize frequent words.
+- Applied TF-IDF vectorization on descriptions.
+- Visualized TF-IDF features using PCA.
+- Identified top informative words via mutual information.
+- Visualized numerical features by genre using violin plots.
 
 ### 3. Feature Engineering and Preprocessing
 
-- Apply Label Encoding to categorical columns.
-- Balance classes using different sampling methods: no balancing, random oversampling, random undersampling, SMOTE.
-- Scale features with StandardScaler, MinMaxScaler, and RobustScaler.
-- Reduce feature dimensions with PCA, LDA, and TruncatedSVD.
+- Encoded categorical features using Label Encoding.
+- Balanced dataset with different resampling techniques.
+- Scaled features with various scalers.
+- Reduced dimensionality to improve model performance and efficiency.
 
 ### 4. Model Training and Evaluation
 
-- Train 10 classifiers over different combinations of encoding, balancing, scaling, and dimensionality reduction.
-- Split data into train/test (80/20).
-- Evaluate models using accuracy, precision, recall, and F1-score (weighted average).
-- Store all results for analysis.
+- Trained 10 different classifiers over multiple combinations of preprocessing steps.
+- Evaluated models using accuracy, precision, recall, and F1-score.
+- Stored all results for analysis.
 
 ### 5. Result Visualization
 
-- Bar plots of top models by F1-score.
-- Heatmaps showing F1-score relationships between scalers, reducers, and models.
-- Interactive Plotly scatterplot of precision vs recall sized by F1-score.
+- Bar plots showing top models by F1-score.
+- Heatmaps illustrating the effect of scalers and reducers on model performance.
+- Interactive plots for detailed performance exploration.
 
 ---
 
-## 📊 Best Model Results (Selected Top Runs)
+## 📊 Best Model Results (Sample of Top Runs)
 
 | Encoding       | Balancer            | Scaler         | Reducer     | Model            | Accuracy | Precision | Recall | F1-Score |
 |----------------|---------------------|----------------|-------------|------------------|----------|-----------|--------|----------|
 | LabelEncoding  | RandomUnderSampler   | MinMaxScaler   | PCA         | MLP              | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | RandomUnderSampler   | MinMaxScaler   | LDA         | DecisionTree     | 1.0      | 1.0       | 1.0    | 1.0      |
 | LabelEncoding  | SMOTE               | MinMaxScaler   | PCA         | SVM              | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | SMOTE               | MinMaxScaler   | PCA         | MLP              | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | SMOTE               | MinMaxScaler   | PCA         | ExtraTree        | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | SMOTE               | MinMaxScaler   | LDA         | DecisionTree     | 1.0      | 1.0       | 1.0    | 1.0      |
 | LabelEncoding  | SMOTE               | MinMaxScaler   | LDA         | RandomForest     | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | SMOTE               | MinMaxScaler   | LDA         | SVM              | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | SMOTE               | MinMaxScaler   | LDA         | KNN              | 1.0      | 1.0       | 1.0    | 1.0      |
-| LabelEncoding  | SMOTE               | MinMaxScaler   | LDA         | XGBoost          | 1.0      | 1.0       | 1.0    | 1.0      |
+| LabelEncoding  | NoBalance           | MinMaxScaler   | LDA         | ExtraTree        | 1.0      | 1.0       | 1.0    | 1.0      |
 
-*(Note: This is a sample of top results; many other combinations achieved similar performance.)*
+*(This is a sample; the project generated over 360 results from various combinations.)*
 
 ---
 
 ## 📦 Installation
-
-To install all required packages:
 
 ```bash
 pip install pandas numpy matplotlib seaborn plotly scikit-learn xgboost imbalanced-learn wordcloud
